@@ -1,0 +1,157 @@
+setwd("C:/Users/김기민/Desktop/방통대 통계/데이터분석방법론/기말과제")
+data_1<-read.csv("서울특별시 공공자전거 이용정보(일별)_2501.csv",fileEncoding = "EUC-KR")
+data_2<-read.csv("서울특별시 공공자전거 이용정보(일별)_2502.csv",fileEncoding = "EUC-KR")
+data_3<-read.csv("서울특별시 공공자전거 이용정보(일별)_2503.csv",fileEncoding = "EUC-KR")
+data_4<-read.csv("서울특별시 공공자전거 이용정보(일별)_2504.csv",fileEncoding = "EUC-KR")
+data_5<-read.csv("서울특별시 공공자전거 이용정보(일별)_2505.csv",fileEncoding = "EUC-KR")
+data_6<-read.csv("서울특별시 공공자전거 이용정보(일별)_2506.csv",fileEncoding = "EUC-KR")
+data_7<-read.csv("서울특별시 공공자전거 이용정보(일별)_2507.csv",fileEncoding = "EUC-KR")
+data_8<-read.csv("서울특별시 공공자전거 이용정보(일별)_2508.csv",fileEncoding = "EUC-KR")
+data_9<-read.csv("서울특별시 공공자전거 이용정보(일별)_2509.csv",fileEncoding = "EUC-KR")
+data_10<-read.csv("서울특별시 공공자전거 이용정보(일별)_2510.csv",fileEncoding = "EUC-KR")
+data_11<-read.csv("서울특별시 공공자전거 이용정보(일별)_2511.csv",fileEncoding = "EUC-KR")
+data_12<-read.csv("서울특별시 공공자전거 이용정보(일별)_2512.csv",fileEncoding = "EUC-KR")
+
+library(dplyr)
+data_jan <- data_1 %>% mutate_at(vars("대여소","대여구분코드","성별","연령대","대여소번호"), as.factor) %>%
+  mutate(대여일자=as.Date(대여일자)) %>% mutate_at(vars("X.이용건수","운동량","탄소량","이동거리.M.","이용시간.분."),as.numeric)
+
+data_jan_2<-data_jan %>% group_by(대여일자,대여구분코드,성별,연령대) %>%
+  summarise(count=n(),평균운동량=mean(운동량,na.rm=TRUE),평균탄소량=mean(탄소량,na.rm=TRUE),평균이동거리=mean(이동거리.M.,na.rm=TRUE),
+            평균이용시간=mean(이용시간.분.,na.rm=TRUE))
+data_jan_3<-data_jan %>%  group_by(대여일자) %>%
+  summarise(count=n(),평균운동량=mean(운동량,na.rm=TRUE),평균탄소량=mean(탄소량,na.rm=TRUE),평균이동거리=mean(이동거리.M.,na.rm=TRUE),
+            평균이용시간=mean(이용시간.분.,na.rm=TRUE))
+
+data_feb <- data_2 %>% mutate_at(vars("대여소","대여구분코드","성별","연령대","대여소번호"), as.factor) %>%
+  mutate(대여일자=as.Date(대여일자)) %>% mutate_at(vars("운동량","탄소량","이동거리.M.","이용시간.분."),as.numeric) %>% rename(X.이용건수=이용건수
+                                                                                                        )
+
+
+data_feb_2<-data_feb %>% group_by(대여일자,대여구분코드,성별,연령대) %>%
+  summarise(count=n(),평균운동량=mean(운동량,na.rm=TRUE),평균탄소량=mean(탄소량,na.rm=TRUE),평균이동거리=mean(이동거리.M.,na.rm=TRUE),
+            평균이용시간=mean(이용시간.분.,na.rm=TRUE))
+data_feb_3<-data_feb %>%  group_by(대여일자) %>%
+  summarise(count=n(),평균운동량=mean(운동량,na.rm=TRUE),평균탄소량=mean(탄소량,na.rm=TRUE),평균이동거리=mean(이동거리.M.,na.rm=TRUE),
+            평균이용시간=mean(이용시간.분.,na.rm=TRUE))
+
+data_mar <- data_3 %>% mutate_at(vars("대여소","대여구분코드","성별","연령대","대여소번호"), as.factor) %>%
+  mutate(대여일자=as.Date(대여일자)) %>% mutate_at(vars("X.이용건수","운동량","탄소량","이동거리.M.","이용시간.분."),as.numeric)
+data_mar_2<-data_mar %>% group_by(대여일자,대여구분코드,성별,연령대) %>%
+  summarise(count=n(),평균운동량=mean(운동량,na.rm=TRUE),평균탄소량=mean(탄소량,na.rm=TRUE),평균이동거리=mean(이동거리.M.,na.rm=TRUE),
+            평균이용시간=mean(이용시간.분.,na.rm=TRUE))
+data_mar_3<-data_mar %>%  group_by(대여일자) %>%
+  summarise(count=n(),평균운동량=mean(운동량,na.rm=TRUE),평균탄소량=mean(탄소량,na.rm=TRUE),평균이동거리=mean(이동거리.M.,na.rm=TRUE),
+            평균이용시간=mean(이용시간.분.,na.rm=TRUE))
+
+data_apr <- data_4 %>% mutate_at(vars("대여소","대여구분코드","성별","연령대","대여소번호"), as.factor) %>%
+  mutate(대여일자=as.Date(대여일자))%>% mutate_at(vars("X.이용건수","운동량","탄소량","이동거리.M.","이용시간.분."),as.numeric)
+data_apr_2<-data_apr %>% group_by(대여일자,대여구분코드,성별,연령대) %>%
+  summarise(count=n(),평균운동량=mean(운동량,na.rm=TRUE),평균탄소량=mean(탄소량,na.rm=TRUE),평균이동거리=mean(이동거리.M.,na.rm=TRUE),
+            평균이용시간=mean(이용시간.분.,na.rm=TRUE))
+data_apr_3<-data_apr %>%  group_by(대여일자) %>%
+  summarise(count=n(),평균운동량=mean(운동량,na.rm=TRUE),평균탄소량=mean(탄소량,na.rm=TRUE),평균이동거리=mean(이동거리.M.,na.rm=TRUE),
+            평균이용시간=mean(이용시간.분.,na.rm=TRUE))
+
+data_may <- data_5 %>% mutate_at(vars("대여소","대여구분코드","성별","연령대","대여소번호"), as.factor) %>%
+  mutate(대여일자=as.Date(대여일자))%>% mutate_at(vars("X.이용건수","운동량","탄소량","이동거리.M.","이용시간.분."),as.numeric)
+data_may_2<-data_may %>% group_by(대여일자,대여구분코드,성별,연령대) %>%
+  summarise(count=n(),평균운동량=mean(운동량,na.rm=TRUE),평균탄소량=mean(탄소량,na.rm=TRUE),평균이동거리=mean(이동거리.M.,na.rm=TRUE),
+            평균이용시간=mean(이용시간.분.,na.rm=TRUE))
+data_may_3<-data_may %>%  group_by(대여일자) %>%
+  summarise(count=n(),평균운동량=mean(운동량,na.rm=TRUE),평균탄소량=mean(탄소량,na.rm=TRUE),평균이동거리=mean(이동거리.M.,na.rm=TRUE),
+            평균이용시간=mean(이용시간.분.,na.rm=TRUE))
+
+data_jun <- data_6 %>% mutate_at(vars("대여소","대여구분코드","성별","연령대","대여소번호"), as.factor) %>%
+  mutate(대여일자=as.Date(대여일자))%>% mutate_at(vars("X.이용건수","운동량","탄소량","이동거리.M.","이용시간.분."),as.numeric)
+data_jun_2<-data_jun %>% group_by(대여일자,대여구분코드,성별,연령대) %>%
+  summarise(count=n(),평균운동량=mean(운동량,na.rm=TRUE),평균탄소량=mean(탄소량,na.rm=TRUE),평균이동거리=mean(이동거리.M.,na.rm=TRUE),
+            평균이용시간=mean(이용시간.분.,na.rm=TRUE))
+data_jun_3<-data_jun %>%  group_by(대여일자) %>%
+  summarise(count=n(),평균운동량=mean(운동량,na.rm=TRUE),평균탄소량=mean(탄소량,na.rm=TRUE),평균이동거리=mean(이동거리.M.,na.rm=TRUE),
+            평균이용시간=mean(이용시간.분.,na.rm=TRUE))
+
+
+data_jul <- data_7 %>% mutate_at(vars("대여소","대여구분코드","성별","연령대","대여소번호"), as.factor) %>%
+  mutate(대여일자=as.Date(대여일자))%>% mutate_at(vars("X.이용건수","운동량","탄소량","이동거리.M.","이용시간.분."),as.numeric)
+data_jul_2<-data_jul %>% group_by(대여일자,대여구분코드,성별,연령대) %>%
+  summarise(count=n(),평균운동량=mean(운동량,na.rm=TRUE),평균탄소량=mean(탄소량,na.rm=TRUE),평균이동거리=mean(이동거리.M.,na.rm=TRUE),
+            평균이용시간=mean(이용시간.분.,na.rm=TRUE))
+data_jul_3<-data_jul %>%  group_by(대여일자) %>%
+  summarise(count=n(),평균운동량=mean(운동량,na.rm=TRUE),평균탄소량=mean(탄소량,na.rm=TRUE),평균이동거리=mean(이동거리.M.,na.rm=TRUE),
+            평균이용시간=mean(이용시간.분.,na.rm=TRUE))
+
+
+data_aug <- data_8 %>% mutate_at(vars("대여소","대여구분코드","성별","연령대","대여소번호"), as.factor) %>%
+  mutate(대여일자=as.Date(대여일자))%>% mutate_at(vars("X.이용건수","운동량","탄소량","이동거리.M.","이용시간.분."),as.numeric)
+data_aug_2<-data_aug %>% group_by(대여일자,대여구분코드,성별,연령대) %>%
+  summarise(count=n(),평균운동량=mean(운동량,na.rm=TRUE),평균탄소량=mean(탄소량,na.rm=TRUE),평균이동거리=mean(이동거리.M.,na.rm=TRUE),
+            평균이용시간=mean(이용시간.분.,na.rm=TRUE))
+data_aug_3<-data_aug %>%  group_by(대여일자) %>%
+  summarise(count=n(),평균운동량=mean(운동량,na.rm=TRUE),평균탄소량=mean(탄소량,na.rm=TRUE),평균이동거리=mean(이동거리.M.,na.rm=TRUE),
+            평균이용시간=mean(이용시간.분.,na.rm=TRUE))
+
+data_sep <- data_9 %>% mutate_at(vars("대여소","대여구분코드","성별","연령대","대여소번호"), as.factor) %>%
+  mutate(대여일자=as.Date(대여일자))%>% mutate_at(vars("X.이용건수","운동량","탄소량","이동거리.M.","이용시간.분."),as.numeric)
+data_sep_2<-data_sep %>% group_by(대여일자,대여구분코드,성별,연령대) %>%
+  summarise(count=n(),평균운동량=mean(운동량,na.rm=TRUE),평균탄소량=mean(탄소량,na.rm=TRUE),평균이동거리=mean(이동거리.M.,na.rm=TRUE),
+            평균이용시간=mean(이용시간.분.,na.rm=TRUE))
+data_sep_3<-data_sep %>%  group_by(대여일자) %>%
+  summarise(count=n(),평균운동량=mean(운동량,na.rm=TRUE),평균탄소량=mean(탄소량,na.rm=TRUE),평균이동거리=mean(이동거리.M.,na.rm=TRUE),
+            평균이용시간=mean(이용시간.분.,na.rm=TRUE))
+
+
+data_oct <- data_10 %>% mutate_at(vars("대여소","대여구분코드","성별","연령대","대여소번호"), as.factor) %>%
+  mutate(대여일자=as.Date(대여일자))%>% mutate_at(vars("X.이용건수","운동량","탄소량","이동거리.M.","이용시간.분."),as.numeric)
+data_oct_2<-data_oct %>% group_by(대여일자,대여구분코드,성별,연령대) %>%
+  summarise(count=n(),평균운동량=mean(운동량,na.rm=TRUE),평균탄소량=mean(탄소량,na.rm=TRUE),평균이동거리=mean(이동거리.M.,na.rm=TRUE),
+            평균이용시간=mean(이용시간.분.,na.rm=TRUE))
+data_oct_3<-data_oct %>%  group_by(대여일자) %>%
+  summarise(count=n(),평균운동량=mean(운동량,na.rm=TRUE),평균탄소량=mean(탄소량,na.rm=TRUE),평균이동거리=mean(이동거리.M.,na.rm=TRUE),
+            평균이용시간=mean(이용시간.분.,na.rm=TRUE))
+
+
+data_nov <- data_11 %>% mutate_at(vars("대여소","대여구분코드","성별","연령대","대여소번호"), as.factor) %>%
+  mutate(대여일자=as.Date(대여일자)) %>% mutate_at(vars("X.이용건수","운동량","탄소량","이동거리.M.","이용시간.분."),as.numeric)
+data_nov_2<-data_nov %>% group_by(대여일자,대여구분코드,성별,연령대) %>%
+  summarise(count=n(),평균운동량=mean(운동량,na.rm=TRUE),평균탄소량=mean(탄소량,na.rm=TRUE),평균이동거리=mean(이동거리.M.,na.rm=TRUE),
+            평균이용시간=mean(이용시간.분.,na.rm=TRUE))
+data_nov_3<-data_nov %>%  group_by(대여일자) %>%
+  summarise(count=n(),평균운동량=mean(운동량,na.rm=TRUE),평균탄소량=mean(탄소량,na.rm=TRUE),평균이동거리=mean(이동거리.M.,na.rm=TRUE),
+            평균이용시간=mean(이용시간.분.,na.rm=TRUE))
+
+
+data_dec <- data_12 %>% mutate_at(vars("대여소","대여구분코드","성별","연령대","대여소번호"), as.factor) %>%
+  mutate(대여일자=as.Date(대여일자))%>% mutate_at(vars("X.이용건수","운동량","탄소량","이동거리.M.","이용시간.분."),as.numeric)
+data_dec_2<-data_dec %>% group_by(대여일자,대여구분코드,성별,연령대) %>%
+  summarise(count=n(),평균운동량=mean(운동량,na.rm=TRUE),평균탄소량=mean(탄소량,na.rm=TRUE),평균이동거리=mean(이동거리.M.,na.rm=TRUE),
+            평균이용시간=mean(이용시간.분.,na.rm=TRUE))
+data_dec_3<-data_dec %>%  group_by(대여일자) %>%
+  summarise(count=n(),평균운동량=mean(운동량,na.rm=TRUE),평균탄소량=mean(탄소량,na.rm=TRUE),평균이동거리=mean(이동거리.M.,na.rm=TRUE),
+            평균이용시간=mean(이용시간.분.,na.rm=TRUE))
+
+data_all_3<- bind_rows(data_jan_3,data_feb_3,data_mar_3,data_apr_3,
+                       data_may_3,data_jun_3,data_jul_3,data_aug_3,
+                       data_sep_3,data_oct_3,data_nov_3,data_dec_3)
+
+data_all_2<-bind_rows(data_jan_2,data_feb_2,data_mar_2,data_apr_2,
+                      data_may_2,data_jun_2,data_jul_2,data_aug_2,
+                      data_sep_2,data_oct_2,data_nov_2,data_dec_2)
+
+data_air_quality<-read.csv("일별_평균_대기오염도정보_2025 (1).csv",fileEncoding = "EUC-KR")
+
+data_air_quality2<-data_air_quality %>%mutate_at(vars(측정일시),as.character)%>% mutate(대여일자=as.Date(측정일시,format = "%Y%m%d")) %>%
+  group_by(대여일자) %>% summarise(평균이산화질소=mean(이산화질소농도.ppm.,na.rm=TRUE),평균오존=mean(오존농도.ppm.,na.rm=TRUE),
+                               평균일산화탄소=mean(일산화탄소농도.ppm.,na.rm=TRUE),평균아황산가스=mean(아황산가스농도.ppm.,na.rm=TRUE),
+                               평균미세먼지=mean(미세먼지농도.....,na.rm=TRUE),평균초미세먼지=mean(초미세먼지농도.....,na.rm=TRUE))
+
+data_merge<-merge(data_all_3,data_air_quality2,by="대여일자")
+
+save(data_merge,file="data_merge.Rdata")
+save(data_all_2,file="data_all.Rdata")
+
+data_all<-bind_rows(data_jan,data_feb,data_mar,data_apr,
+                    data_may,data_jun,data_jul,data_aug,
+                    data_sep,data_oct,data_nov,data_dec)
+
+save(data_all,file="rawdata.Rdata")
