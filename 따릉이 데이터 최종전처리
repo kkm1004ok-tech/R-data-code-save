@@ -1,0 +1,9 @@
+setwd("C:/Users/김기민/Desktop/방통대 통계/데이터분석방법론/기말과제")
+load("rawdata.Rdata")
+
+library(dplyr)
+data_clean<-data_all %>% mutate(성별 = toupper(성별))%>%  
+  mutate(성별=ifelse(trimws(성별)=="","비공개",성별)) %>% 
+  mutate_at(vars(성별),as.factor) %>%
+  mutate(탄소량=ifelse(is.na(탄소량),(이동거리.M. / 1000) * 0.232, 탄소량)) %>%
+  mutate_at(vars(대여일자),as.Date)
